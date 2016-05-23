@@ -50,15 +50,23 @@ run.ga <- function(n.plants,
 }
 
 ## run the GA with default values
-find.model <- function(f, k) {
+find.mix <- function(f=f,
+                       k=k,
+                       N=100,
+                       n.gens=1000,
+                       s=5,
+                       p.mutate=0.01,
+                       p.sex=0.5,
+                       p.rec=0.25,
+                       fitness=f) {
   res <- run.ga(n.plants=k,
                 n.plants.tot=ncol(v.mat),
-                N=100,
-                n.gens=1000,
-                s=5,
-                p.mutate=0.01,
-                p.sex=0.5,
-                p.rec=0.25,
+                N=N,
+                n.gens=n.gens,
+                s=s,
+                p.mutate=p.mutate,
+                p.sex=p.sex,
+                p.rec=p.rec,
                 fitness=f)
   colnames(v.mat)[which(res$best.model)]
 }

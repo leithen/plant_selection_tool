@@ -12,11 +12,18 @@ load('source-native.RData', verbose=TRUE)
 ## values values of f.
 ##
 ## for example, optimizing 'abundance' for 9 species mixes: 
-mix.a <- find.model(f=abundance, k=9)
+mix.a <- find.mix(f=abundance, k=9)
 ## optimizing 'richness': 
-mix.r <- find.model(f=richness, k=9)
+mix.r <- find.mix(f=richness, k=9)
 ## optimizing both 'abundance' and 'richness': 
-mix.ar <- find.model(f=abundance.richness, k=9)
+mix.ar <- find.mix(f=abundance.richness, k=9)
+
+## one can change parameters of the genetic algorithm by passing them
+## in as arugments.  E.g., to run it for more iterations, one could do
+## the following:
+mix.ar <- find.mix(f=abundance.richness, k=9, n.gens=10000)
+## for a full list of optional arguments, see readme.pdf or check the
+## source code in 'R/control.R'
 
 ## compare model scores for the above mixes for abundance (higher is
 ## better):
