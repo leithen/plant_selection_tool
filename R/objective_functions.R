@@ -16,7 +16,7 @@ phenology <- function(m) {
 }
 
 ## number of fully supported species
-num.supported <- function(m) {
+numsupported <- function(m) {
   plants.by.polli <-
     apply(v.mat, 1, function(x) colnames(v.mat)[x>=1])
   m <- colnames(v.mat)[m]
@@ -37,32 +37,19 @@ abundance.richness <- function(m)
   abundance(m)*richness(m)
 abundance.phenology <- function(m)
   abundance(m)*phenology(m)
-richness.phenology <- function(m)
-  richness(m)*phenology(m)
-abundance.richness.phenology <- function(m)
-  abundance(m)*richness(m)*phenology(m)
-abundance.num.supported <- function(m)
-  abundance(m)*num.supported(m)
-richness.num.supported <- function(m)
-  richness(m)*num.supported(m)
-abundance.richness.num.supported <- function(m)
-  abundance(m)*richness(m)*num.supported(m)
+phenology.richness <- function(m)
+  phenology(m)*richness(m)
+abundance.phenology.richness <- function(m)
+  abundance(m)*phenology(m)*richness(m)
+abundance.numsupported <- function(m)
+  abundance(m)*numsupported(m)
+numsupported.richness <- function(m)
+  numsupported(m)*richness(m)
+abundance.numsupported.richness <- function(m)
+  abundance(m)*numsupported(m)*richness(m)
 
+## compute score for model m
 score <- function(f.list, m) {
-  g <- function(f.list, m)
-    sapply(f.list, function(y) y(m))
+  g <- function(f.list, m) sapply(f.list, function(y) y(m))
   prod(g(f.list, m))
-}
-
-get.best <- function(crit, s, k) {
-  load(sprintf('saved/best-models/%s/%d.RData', s, k))
-  cases <- lapply(best.models, function(x) x['case'][[1]])
-  best <- which(sapply(cases, function(x)
-                       length(x)==length(crit) & all(crit%in%x)))
-  sort(best.models[[best]]['best.model'][[1]])
-}
-
-get.naive <- function(s, k) {
-  load(sprintf('saved/naive-models/%s/%d.RData', s, k))
-  sort(best.naive)
 }

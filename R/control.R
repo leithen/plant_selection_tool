@@ -30,8 +30,15 @@ update.state <- function(s0, s1) {
 
 ## Run the GA for ngens generations, collecting the best fitness over
 ## time, and returning the state and best model.
-run.ga <- function(n.plants, n.plants.tot, N, n.gens, s, p.mutate,
-                   p.sex, p.rec, fitness) {
+run.ga <- function(n.plants,
+                   n.plants.tot,
+                   N,
+                   n.gens,
+                   s,
+                   p.mutate,
+                   p.sex,
+                   p.rec,
+                   fitness) {
   x <- initial.popn(N, n.plants, n.plants.tot,
                     fitness=fitness)
   out <- vector("numeric", n.gens)
@@ -40,4 +47,18 @@ run.ga <- function(n.plants, n.plants.tot, N, n.gens, s, p.mutate,
     out[i] <- x$best.w
   }
   list(best.w=x$best.w, best.model=x$best.model, best.w.t=out)
+}
+
+## run the GA with default values
+find.model <- function(f, k) {
+  res <- run.ga(n.plants=k,
+                n.plants.tot=ncol(v.mat),
+                N=100,
+                n.gens=1000,
+                s=5,
+                p.mutate=0.01,
+                p.sex=0.5,
+                p.rec=0.25,
+                fitness=f)
+  colnames(v.mat)[which(res$best.model)]
 }
