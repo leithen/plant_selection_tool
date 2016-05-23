@@ -1,6 +1,3 @@
-setwd('~/Documents/projects_complete/2016/plant_selection_tool/tool_github')
-rm(list=ls())
-
 ## load genetic algorithm
 source('R/ga.R')
 source('R/control.R')
