@@ -5,7 +5,7 @@ source('R/control.R')
 source('R/objective_functions.R')
 
 ## load sample data (for native plants in California)
-load('source-native.RData', verbose=TRUE)
+load('native-plants.RData', verbose=TRUE)
 
 ## find the collection of 'k' plants that optimize the objective
 ## function 'f'.  k must be an integer.  See readme.pdf for potential
